@@ -1,0 +1,22 @@
+{
+  "name": "BioLab",
+  "version": "1.0.0",
+  "description": "Computer science project",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Alfred Sun",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^21.3.1",
+    "electron-packager": "^17.1.1",
+    "lowdb": "^5.0.5"
+  },
+  "dependencies": {
+    "@icon-park/svg": "^1.4.2",
+    "electron-store": "^8.1.0",
+    "jquery": "^3.6.1",
+    "nedb": "^1.8.0"
+  }
+}

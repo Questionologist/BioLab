@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="color-scheme" content="light dark">
+
+        <style>
+
+        </style>
+
+    </head>
+
+
+    <body>
+
+        <script>
+            Math.PI;
+            function Back(){
+                location.href="Toolbox.html"
+            }
+
+            function DNA_Align(){
+
+                //document.getElementById("DispBoard").innerHTML = "Please enter the sequences of DNA you want to compare:";
+                var input1 = document.getElementById("Input1").value;
+                var input2 = document.getElementById("Input2").value;
+
+                var Seq1 = [];
+                for (var i = 0; i < input1.length; i++) {
+                Seq1[i] = input1.charAt(i);
+                }
+
+                var Seq2 = [];
+                for (var i = 0; i < input2.length; i++) {
+                Seq2[i] = input2.charAt(i);
+                }        
+
+                var board = [];
+                for (var i = 0; i < Seq1.length+1; i++) {
+                board[i] = [];
+                }
+
+                var decision = [];
+                for (var i = 0; i < Seq1.length+1; i++) {
+                decision[i] = [];
+                }                
+
+                var row = Seq1.length + 1;
+                var column = Seq2.length + 1;
+
+                for (var i = 1; i < row; i++) {
+                    board[i][0] = -i;
+                    decision[i][0] = "T";
+                }
+                for (var i = 1; i < column; i++) {
+                    board[0][i] = -i;
+                    decision[0][i] = "L";
+                }
+
+                board[0][0] = 0;
+
+                //BoardCreation
+
+                for (var i = 1; i < row; i++) {
+                    for (var j = 1; j < column; j++) {
+                        var score = 0;
+                        var deci = " ";
+                        var top = board[i-1][j] - 1;
+                        var left = board[i][j-1] - 1;
+                        var topleft = 0;
+                        if (Seq1[i-1] == Seq2[j-1]) {
+                            topleft = board[i-1][j-1] + 1;
+                        } else {
+                            topleft = board[i-1][j -1] - 1;
+                        }
+                        if (top >= left && top >= topleft) {
+                            score = top;
+                            deci = "T";
+                        }
+                        if (left >= top && left >= topleft) {
+                            score = left;
+                            deci = "L";
+                        }
+                        if (topleft >= top && topleft >= left) {
+                            score = topleft;
+                            deci = "D";
+                        }
+                        board[i][j] = score;
+                        decision[i][j] = deci;
+                    }
+                } 
+
+                /*for (var i = 0; i < row; i++) {
+                    document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML + "<br>" + board[i];
+                }
+
+                    document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML + "<br>";
+
+                for (var i = 0; i < row; i++) {
+                    document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML + "<br>" + decision[i];
+                }*/
+                
+                //RetroSearch
+
+                var retro = [];
+                var direct = [];
+                var sequence1 = "";
+                var alignment = "";
+                var sequence2 = "";
+                var coord1 = row - 1;
+                var coord2 = column - 1;
+                var index = 0;
+                var index2 = 0;
+                var index11 = 0;
+                var index12 = 0;
+                var identity = 0;
+                var percentile = 0;
+                while (coord1 != 0 || coord2 != 0) {
+                    retro[index] = decision[coord1][coord2];
+                    if (retro[index] == "D") {
+                        coord1 -= 1;
+                        coord2 -= 1;
+                    }
+                    if (retro[index] == "L") {
+                        coord2 -= 1;
+                    }
+                    if (retro[index] == "T") {
+                        coord1 -= 1;
+                    }
+                        index += 1;
+                }
+                
+                for (var i = index; i >= 0; i--) {
+                    direct[index2] = retro[i];
+                    index2 += 1;
+                }
+
+                var seque1 = Seq1;
+                var seque2 = Seq2;
+
+                for (var i = 0; i <= index2; i++){
+                    if(direct[i]=="D"){
+                    sequence1 = sequence1 + seque1[index11];
+                    if(seque1[index11]==seque2[index12]){
+                        alignment = alignment + "|";
+                        identity += 1;
+                    } else {
+                        alignment = alignment + " ";
+                    }
+                    sequence2 = sequence2 + seque2[index12];        
+                    index11 += 1;
+                    index12 += 1;
+                    }
+                    if(direct[i]=="T"){
+                    sequence1 = sequence1 + seque1[index11];
+                    alignment = alignment + " ";
+                    sequence2 = sequence2 + "_";        
+                    index11 += 1;
+                    }
+                    if(direct[i]=="L"){
+                    sequence1 = sequence1 + "_";
+                    alignment = alignment + " ";
+                    sequence2 = sequence2 + seque2[index12];        
+                    index12 += 1;
+                    }      
+                }
+                if(seque1.length>seque2.length){
+                    percentile = (identity / seque2.length) * 100;
+                } else {
+                    percentile = (identity / seque1.length) * 100;      
+                }
+                //Output
+
+                document.getElementById("Identity").innerHTML = "Sequence Identity: " + Math.floor(percentile) + "%";
+                document.getElementById("Alignment").innerHTML = sequence1 + "<br>";
+                document.getElementById("Alignment").innerHTML = document.getElementById("Alignment").innerHTML + alignment + "<br>";
+                document.getElementById("Alignment").innerHTML = document.getElementById("Alignment").innerHTML + sequence2 + "<br>";
+
+            }
+        </script>
+
+        <h2 id="DispBoard">Please enter the sequences of DNA you want to compare:</h2>
+
+        <form>
+            <input type="text" id="Input1" style="font-family: monospace; width: 50pc;"> First Seuquence (ATCG) </input> <br>
+            <input type="text" id="Input2" style="font-family: monospace; width: 50pc;"> Second Sequence (ATCG) </input>
+        </form>  
+
+        <h3 id="Identity">------</h3>
+        <h3>Optimal Alignment: </h3>
+
+        <h4 id="Alignment" style="font-family: monospace; white-space: pre-wrap;">------</h4>
+
+        <button onclick="DNA_Align()"> Test </button>
+        <button onclick="Back()">Back</button>
+
+    </body>
+
+</html>

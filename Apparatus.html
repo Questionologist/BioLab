@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://at.alicdn.com/t/c/font_3794710_zez6h9p7vf.css' rel='stylesheet'>
+    <link href='https://at.alicdn.com/t/c/font_3794710_lpdxrntsf0j.js' rel='stylesheet'>
+    <script src="./jquery-3.6.1.js"></script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+        <i class="iconfont icon--yiliao-jiyin icon"></i>
+          <div class="logo_name">BioLab</div>
+          <i class='bx bx-menu' id="btn" ></i>
+      </div>
+    <ul class="nav-list">
+      <li>
+        <a href="Reagent.html">
+            <i class="iconfont icon-shiguanshiji"></i>
+          <span class="links_name">Reagent</span>
+        </a>
+         <span class="tooltip">Reagent</span>
+      </li>
+      <li>
+       <a href="Recorder.html">
+         <i class="iconfont icon-jilu"></i>
+         <span class="links_name">Experiment Record</span>
+       </a>
+       <span class="tooltip">Experiment Record</span>
+     </li>
+     <li>
+       <a href="Apparatus.html">
+        <i class="iconfont icon-shiyanshijilu"></i>
+         <span class="links_name">Apparatus Status</span>
+       </a>
+       <span class="tooltip">Apparatus Status</span>
+     </li>
+     <li>
+       <a href="Accident.html">
+        <i class="iconfont icon-jurassic_warning"></i>
+         <span class="links_name">Accident Report</span>
+       </a>
+       <span class="tooltip">Accident Report</span>
+     </li>
+     <li>
+       <a href="Toolbox.html">
+        <i class="iconfont icon-xiaogongju"></i>
+         <span class="links_name">Tool Box</span>
+       </a>
+       <span class="tooltip">Tool Box</span>
+     </li>
+     <li>
+       <a href="Settings.html">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name">Setting</span>
+       </a>
+       <span class="tooltip">Setting</span>
+     </li>
+     <li class="profile">
+         <div class="profile-details">
+           <!--<img src="profile.jpg" alt="profileImg">-->
+           <div class="name_job">
+             <div class="name"></div>
+             <div class="job"></div>
+           </div>1
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  <section class="home-section">
+     <!--添加界面-->
+     
+      <div class="text">Apparatus Status
+        <div id = "add_btn" class='btn circle' align="center" onmousemove="btnChangeDark()" onmouseleave="btnReturn()" onclick="showForm()">
+            <img src="/Users/sunmohai/my-electron-app/icon/add.png"  />
+        </div>
+        <div class="mainblock">
+            Apparatus
+            <div id="0" class="mainDiv">
+
+
+            </div>
+        </div>
+        <div class="form" id="addForm" style="visibility:hidden">
+          Add Apparatus
+          <br/>
+          <form class="info-entry">
+            Apparatus Name: <input type="text" id="name" name="name"><br/><br/>
+            Apparatus ID: <input type="text" id="id" name="ID"><br/><br/>
+            Apparatus Type:<select id="type">
+              <option>-80℃ Freezer</option>
+              <option>4 -20℃ Refrigerator-Freezer</option>
+              <option>Analytical Balance</option>
+              <option>Biorad Thermocycler</option>
+              <option>Blue Light Transilluminator</option>
+              <option>Clean Bench</option>
+              <option>Cryo-Centrifuge</option>
+              <option>Dry Bath</option>
+              <option>Drying Oven</option>
+              <option>Ice Maker</option>
+              <option>Microwave</option>
+              <option>Mini Centrifuge</option>
+              <option>Shaking Incubator</option>
+              <option>Spectrophotometer</option>
+              <option>Thermo Incubator</option>
+              <option>Vortex mixer</option>
+            </select>
+            <br/><br/>
+            Apparatus status:
+            <br>
+            <input type="radio" name="status" value="Occupied" />Occupied
+            <br>
+            <input type="radio" name="status" value="Unoccupied" />Unoccupied
+          </form>
+          <div class="add-btn" id="addApparatus" onclick="addDiv()">
+            Add
+          </div>
+          <div class="exit-btn" id="addApparatus" onclick="hideForm()">
+            Exit
+          </div>
+        </div>
+      </div>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+    function btnChangeDark(){
+        let btn = document.getElementById("add_btn")
+        btn.style.backgroundColor = "rgb(186, 190, 203)";
+    }
+
+    function btnReturn(){
+        document.getElementById("add_btn").style.backgroundColor = "rgb(228, 233, 247)";
+    }
+
+    function showForm() {
+        document.getElementById("addForm").style.visibility = "visible";
+        }
+    function hideForm(){
+        document.getElementById("addForm").style.visibility = "hidden";
+    }
+    function addDiv(imgid){
+        var imgid=document.getElementsByClassName("aimg").length+1;
+        var name= document.getElementById("name").value;
+        var id = document.getElementById("id").value;
+        var type = document.getElementById("type").value;
+        var status = $("input[name='status']:checked").val();
+        var div = "<div class='block' id = 'd"+imgid+"'><img class='aimg' id='"+imgid+"' src='' /><div class='type'>"+type+"</div> <div class='id'>"+id+"</div><div class='status'>"+status+"</div><button class='DeleteBtn' onclick='Delete(this.id)' id=b"+imgid+">Delete</button> </div>";
+        $("#0").append(div);
+        var pictureUrl = "/Users/sunmohai/my-electron-app/apparatus/"+type+".png";//后台传入的图片路径，url指的是数据库中图片的路径
+        document.getElementById(imgid).src = pictureUrl;
+        document.getElementById("addForm").style.visibility = "hidden";  
+    }
+    function Delete(click_id){
+      var editedID = click_id.slice(1) 
+      $("#d"+editedID).remove();
+    }
+  </script>
+</body>
+</html>

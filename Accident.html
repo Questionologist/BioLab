@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://at.alicdn.com/t/c/font_3794710_zez6h9p7vf.css' rel='stylesheet'>
+    <link href='https://at.alicdn.com/t/c/font_3794710_lpdxrntsf0j.js' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+        <i class="iconfont icon--yiliao-jiyin icon"></i>
+          <div class="logo_name">BioLab</div>
+          <i class='bx bx-menu' id="btn" ></i>
+      </div>
+    <ul class="nav-list">
+      <li>
+        <a href="Reagent.html">
+            <i class="iconfont icon-shiguanshiji"></i>
+          <span class="links_name">Reagent</span>
+        </a>
+         <span class="tooltip">Reagent</span>
+      </li>
+      <li>
+       <a href="Recorder.html">
+         <i class="iconfont icon-jilu"></i>
+         <span class="links_name">Experiment Record</span>
+       </a>
+       <span class="tooltip">Experiment Record</span>
+     </li>
+     <li>
+       <a href="Apparatus.html">
+        <i class="iconfont icon-shiyanshijilu"></i>
+         <span class="links_name">Apparatus Status</span>
+       </a>
+       <span class="tooltip">Apparatus Status</span>
+     </li>
+     <li>
+       <a href="Accident.html">
+        <i class="iconfont icon-jurassic_warning"></i>
+         <span class="links_name">Accident Report</span>
+       </a>
+       <span class="tooltip">Accident Report</span>
+     </li>
+     <li>
+       <a href="Toolbox.html">
+        <i class="iconfont icon-xiaogongju"></i>
+         <span class="links_name">Tool Box</span>
+       </a>
+       <span class="tooltip">Tool Box</span>
+     </li>
+     <li>
+       <a href="Settings.html">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name">Setting</span>
+       </a>
+       <span class="tooltip">Setting</span>
+     </li>
+     <li class="profile">
+         <div class="profile-details">
+           <!--<img src="profile.jpg" alt="profileImg">-->
+           <div class="name_job">
+             <div class="name"></div>
+             <div class="job"></div>
+           </div>
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  <section class="home-section">
+      <div class="text">Accident Report</div>
+      <div class="mainblock">
+        <form class="accident"><br>
+          RecorderID: <input class='recorder'type = "text"><br><br>
+          Severeness: <select><br>
+            <option>Minor</option>
+            <option>Normal</option>
+            <option>Severe</option>
+            <option >Extremely Severe</option>
+          </select><br><br>
+          Discription: <br><textarea  class="dis" rows="10" cols="20"></textarea>
+          <br>
+          <button class="submit">Submit</button>
+        </form>
+    </section>
+      </div>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>
