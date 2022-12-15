@@ -67,5 +67,6 @@ To debug our program, here is a screenshot of our testing:
 
   <h2>Reference<h2>
     electronjs.org. (n.d.). | Electron. [online] Available at: https://www.electronjs.org/zh/docs/latest/ [Accessed 3 Dec. 2022].
+    Smith, T F et al. “Comparative biosequence metrics.” Journal of molecular evolution vol. 18,1 (1981): 38-46. doi:10.1007/BF01733210
 
 ‌
