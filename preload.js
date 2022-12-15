@@ -1,5 +1,5 @@
 // preload.js
-
+ 
 // All the Node.js APIs are available in the preload process.
 // 它拥有与Chrome扩展一样的沙盒。
 window.addEventListener('DOMContentLoaded', () => {
